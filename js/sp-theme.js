@@ -9,6 +9,19 @@ var sp_theme = sp_theme || {};
 
     sp_theme.main = {
         init: function(){
+
+            // Enable jQuery UI radio buttons for post viewing format
+            $( '#post-view-format' ).buttonset();
+
+            $( '#post-view-grid').click(function(){
+               $( 'article' ).addClass( 'grid-view' );
+            });
+
+            $( '#post-view-list' ).click(function(){
+                $( 'article').removeClass( 'grid-view' );
+            })
+
+            // Make the site title editable
             $( '#site-title-editable' ).editable(
                 function(value, settings){
                     return value;

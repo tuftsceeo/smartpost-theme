@@ -24,7 +24,13 @@ get_header(); ?>
 
                 <?php get_sidebar( 'category' ); ?>
             </header><!-- .archive-header -->
+
 		<?php if ( have_posts() ) : ?>
+            <div class="the-posts">
+                <div id="post-view-format">
+                    <input type="radio" id="post-view-grid" name="post-view-radio" value="grid" checked="checked"><label for="post-view-grid" title="View in grid format."><img src="<?php echo get_template_directory_uri() . '/images/grid2x2.png' ?>" /></label>
+                    <input type="radio" id="post-view-list" name="post-view-radio" value="list"><label for="post-view-list" title="View in list format."><img src="<?php echo get_template_directory_uri() . '/images/list.png' ?>" /></label>
+                </div>
 			<?php
 			/* Start the Loop */
 			while ( have_posts() ) : the_post();
@@ -39,7 +45,7 @@ get_header(); ?>
 
 			twentytwelve_content_nav( 'nav-below' );
 			?>
-
+            </div><!-- .the-posts -->
 		<?php else : ?>
 			<?php get_template_part( 'content', 'none' ); ?>
 		<?php endif; ?>

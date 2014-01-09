@@ -152,6 +152,9 @@ function twentytwelve_scripts_styles() {
 	wp_enqueue_style( 'twentytwelve-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentytwelve-style' ), '20121010' );
 	$wp_styles->add_data( 'twentytwelve-ie', 'conditional', 'lt IE 9' );
 
+    // Load the 'wp' jQuery UI custom stylesheet
+    wp_enqueue_style( 'sp-twentytwelve-jquery-ui', get_template_directory_uri() . '/css/wp-jquery-ui-theme/jquery-ui-1.10.3.custom.min.css', array( 'twentytwelve-style' ) );
+
     // Loads SP Theme Twenty Twelve related JS
     wp_register_script( 'sp_theme', get_template_directory_uri() . '/js/sp-theme.js', array( 'jquery', 'jquery-editable', 'plupload', 'plupload-all' ) );
 

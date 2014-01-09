@@ -200,15 +200,6 @@ img {
 	color: #636363;
 }
 
-/* Shared Post Format styling */
-article.format-quote footer.entry-meta,
-article.format-link footer.entry-meta,
-article.format-status footer.entry-meta {
-	font-size: 11px;
-	font-size: 0.785714286rem;
-	line-height: 2.181818182;
-}
-
 /* Form fields, general styles first */
 button,
 input,
@@ -694,6 +685,16 @@ footer[role="contentinfo"] a:hover {
 /* =Main content and comment content
 -------------------------------------------------------------- */
 
+.the-posts{
+    position: relative;
+}
+
+.the-posts #post-view-format{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
 .entry-meta {
 	clear: both;
 }
@@ -1010,6 +1011,13 @@ article .featured-img{
     overflow: hidden;
 }
 
+.grid-view{
+    float: left;
+    width: 45%;
+    height: 280px;
+    margin-right: 40px;
+    overflow: hidden;
+}
 /* =Archives
 -------------------------------------------------------------- */
 
