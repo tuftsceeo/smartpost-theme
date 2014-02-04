@@ -678,23 +678,23 @@ footer[role="contentinfo"] a:hover {
 
 /* =Main content and comment content
 -------------------------------------------------------------- */
-
 .the-posts{
     position: relative;
 }
-
 .the-posts #post-view-format{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    z-index: 9999;
+    display: block;
+    clear: both;
+    text-align: right;
+    margin-bottom: 10px;
 }
 
 .grid-view-icon .ui-button-text:before{
     content: "\f180";
     font: 400 15px/1 dashicons;
 }
-
+#post-view-format{
+    visibility: hidden;
+}
 .list-view-icon .ui-button-text:before{
     content: "\f214";
     font: 400 15px/1 dashicons;
@@ -1027,14 +1027,6 @@ article .featured-img{
     max-width: 200px;
     overflow: hidden;
 }
-
-.grid-view{
-    float: left;
-    width: 45%;
-    height: 285px;
-    margin-right: 40px;
-    overflow: hidden;
-}
 /* =Archives
 -------------------------------------------------------------- */
 
@@ -1329,14 +1321,21 @@ img#wpstats {
 
 /* Minimum width of 600 pixels. */
 @media screen and (min-width: 600px) {
-	.author-avatar {
+    .grid-view{
+        float: none;
+        width: auto;
+        height: auto;
+        margin-right: inherit;
+        overflow: inherit;
+    }
+    .author-avatar {
 		float: left;
 		margin-top: 8px;
 		margin-top: 0.571428571rem;
+        margin-right: 20px;
 	}
 	.author-description {
-		float: right;
-		width: 80%;
+        overflow: hidden;
 	}
     .author-description .author-name{
         font-size: 25px;
@@ -1498,6 +1497,9 @@ img#wpstats {
 		margin-left: 48px;
 		margin-left: 3.428571429rem;
 	}
+    #post-view-format{
+        visibility: hidden;
+    }
 }
 
 /* Minimum width of 960 pixels. */
@@ -1524,6 +1526,19 @@ img#wpstats {
 	}
 }
 
+/* Minimum width of 1325 pixels */
+@media screen and (min-width: 1325px) {
+    .grid-view{
+        float: left;
+        width: 45%;
+        height: 285px;
+        margin-right: 40px;
+        overflow: hidden;
+    }
+    #post-view-format{
+        visibility: visible;
+    }
+}
 
 /* =Print
 ----------------------------------------------- */

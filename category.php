@@ -30,6 +30,7 @@ get_header(); ?>
                 <div id="post-view-format">
                     <input type="radio" id="post-view-grid" name="post-view-radio" value="grid" checked="checked"><label for="post-view-grid" class="grid-view-icon" title="View in grid format."></label>
                     <input type="radio" id="post-view-list" name="post-view-radio" value="list"><label for="post-view-list" class="list-view-icon" title="View in list format."></label>
+                    <div class="clear"></div>
                 </div>
 			<?php
 			/* Start the Loop */

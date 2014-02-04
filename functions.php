@@ -205,27 +205,25 @@ function twentytwelve_scripts_styles() {
     // Load the 'wp' jQuery UI custom stylesheet
     wp_enqueue_style( 'sp-twentytwelve-jquery-ui', get_template_directory_uri() . '/css/wp-jquery-ui-theme/jquery-ui-1.10.3.custom.min.css', array( 'twentytwelve-style' ) );
 
-    // Loads SP Theme Twenty Twelve related JS
-    wp_register_script( 'sp_theme', get_template_directory_uri() . '/js/sp-theme.js', array( 'jquery', 'jquery-editable', 'plupload', 'plupload-all' ) );
-
     // Detect whether the SP plugin has been activated - if it hasn't load extra JS
     if( !defined('SP_PLUGIN_NAME') ){
-        wp_register_script( 'jquery-editable', get_template_directory_uri() . 'js/jquery.jeditable.mini.js', array( 'jquery' ) );
         wp_enqueue_script( 'jquery' );
-        wp_enqueue_script( 'jquery-editable' );
-        wp_enqueue_script( 'plupload' );
-        wp_enqueue_script( 'plupload-all' );
+        wp_enqueue_script( 'jquery-form' );
+        wp_enqueue_script( 'jquery-ui-core' );
+        wp_enqueue_script( 'jquery-ui-widget' );
+        wp_enqueue_script( 'jquery-ui-mouse' );
+        wp_enqueue_script( 'jquery-ui-draggable' );
+        wp_enqueue_script( 'jquery-ui-droppable' );
+        wp_enqueue_script( 'jquery-ui-sortable' );
+        wp_enqueue_script( 'jquery-ui-dialog' );
+        wp_enqueue_script( 'jquery-ui-tabs' );
+        wp_enqueue_script( 'jquery-ui-button' );
     }
 
-    wp_enqueue_script( 'sp_theme' );
-    wp_localize_script( 'sp_theme', 'sp_theme', array(
-            'SP_THEME_AJAX_URL' => admin_url( 'admin-ajax.php' ),
-            'SP_THEME_NONCE'    => wp_create_nonce( 'sp_theme_nonce' ),
-            'MAX_UPLOAD_SIZE'        => WP_MEMORY_LIMIT,
-            'UPLOAD_SWF_URL'         => includes_url( 'js/plupload/plupload.flash.swf' ),
-            'UPLOAD_SILVERLIGHT_URL' => includes_url( 'js/plupload/plupload.silverlight.xap' )
-        )
-    );
+    // Loads SP Theme Twenty Twelve related JS
+    wp_register_script( 'sp-theme-js', get_template_directory_uri() . '/js/sp-theme.js', array( 'jquery', 'jquery-ui-core' ) );
+    wp_enqueue_script( 'sp-theme-js' );
+
 }
 add_action( 'wp_enqueue_scripts', 'twentytwelve_scripts_styles' );
 

@@ -70,9 +70,17 @@ get_header(); ?>
 			</div><!-- .author-info -->
 
 			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'content', get_post_format() ); ?>
-			<?php endwhile; ?>
+
+            <div class="the-posts">
+                <div id="post-view-format">
+                    <input type="radio" id="post-view-grid" name="post-view-radio" value="grid" checked="checked"><label for="post-view-grid" class="grid-view-icon" title="View in grid format."></label>
+                    <input type="radio" id="post-view-list" name="post-view-radio" value="list"><label for="post-view-list" class="list-view-icon" title="View in list format."></label>
+                    <div class="clear"></div>
+                </div>
+                <?php while ( have_posts() ) : the_post(); ?>
+                    <?php get_template_part( 'content', get_post_format() ); ?>
+                <?php endwhile; ?>
+            </div><!-- end .the-posts -->
 
 			<?php twentytwelve_content_nav( 'nav-below' ); ?>
 

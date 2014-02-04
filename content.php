@@ -9,7 +9,7 @@
  * @since Twenty Twelve 1.0
  */
 ?>
-    <?php $grid_view = !is_single() ? 'grid-view' : ''; ?>
+    <?php $grid_view = ( !is_single() && !is_front_page() ) ? 'grid-view' : ''; ?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class( array( $grid_view ) ); ?>>
 		<?php if ( is_sticky() && is_home() && ! is_paged() ) : ?>
 		<div class="featured-post">

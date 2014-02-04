@@ -44,7 +44,13 @@
 		<nav id="site-navigation" class="main-navigation" role="navigation">
 			<h3 class="menu-toggle"><?php _e( 'Menu', 'twentytwelve' ); ?></h3>
 			<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentytwelve' ); ?>"><?php _e( 'Skip to content', 'twentytwelve' ); ?></a>
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) ); ?>
+			<?php
+            if(is_user_logged_in()){
+                wp_nav_menu( array( 'theme_location' => 'logged-in', 'menu_class' => 'nav-menu' ) );
+            }else{
+                wp_nav_menu( array( 'theme_location' => 'logged-out', 'menu_class' => 'nav-menu' ) );
+            }
+            ?>
 		</nav><!-- #site-navigation -->
 
 		<?php if ( get_header_image() ) : ?>

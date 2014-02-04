@@ -19,8 +19,7 @@ var sp_theme = sp_theme || {};
 
             $( '#post-view-list' ).click(function(){
                 $( 'article').removeClass( 'grid-view' );
-            })
-
+            });
         }
     }
 
