@@ -28,8 +28,8 @@ get_header(); ?>
 		<?php if ( have_posts() ) : ?>
             <div class="the-posts">
                 <div id="post-view-format">
-                    <input type="radio" id="post-view-grid" name="post-view-radio" value="grid" checked="checked"><label for="post-view-grid" title="View in grid format."><img src="<?php echo get_template_directory_uri() . '/images/grid2x2.png' ?>" /></label>
-                    <input type="radio" id="post-view-list" name="post-view-radio" value="list"><label for="post-view-list" title="View in list format."><img src="<?php echo get_template_directory_uri() . '/images/list.png' ?>" /></label>
+                    <input type="radio" id="post-view-grid" name="post-view-radio" value="grid" checked="checked"><label for="post-view-grid" class="grid-view-icon" title="View in grid format."></label>
+                    <input type="radio" id="post-view-list" name="post-view-radio" value="list"><label for="post-view-list" class="list-view-icon" title="View in list format."></label>
                 </div>
 			<?php
 			/* Start the Loop */

@@ -190,6 +190,7 @@ img {
 }
 .page-title,
 .widget-title,
+.widget-cat-area th,
 .entry-content th,
 .comment-content th {
 	font-size: 11px;
@@ -449,23 +450,20 @@ img.wp-smiley,
 	margin-bottom: 1.571428571rem;
 }
 .author-info {
-	border-top: 1px solid #ededed;
 	margin: 24px 0;
 	margin: 1.714285714rem 0;
-	padding-top: 24px;
-	padding-top: 1.714285714rem;
 	overflow: hidden;
 }
 .author-description p {
 	color: #757575;
-	font-size: 13px;
-	font-size: 0.928571429rem;
+	font-size: 18px;
+	font-size: 1.125rem;
 	line-height: 1.846153846;
+    margin-top: 10px;
 }
 .author.archive .author-info {
-	border-top: 0;
-	margin: 0 0 48px;
-	margin: 0 0 3.428571429rem;
+    border-bottom: 1px solid #ededed;
+    padding: 0 0 2.428571rem;
 }
 .author.archive .author-avatar {
 	margin-top: 0;
@@ -528,10 +526,6 @@ a:hover {
 	padding: 0 24px;
 	padding: 0 1.714285714rem;
 	background-color: #fff;
-}
-.site-content {
-	margin: 24px 0 0;
-	margin: 1.714285714rem 0 0;
 }
 .widget-area {
 	margin: 24px 0 0;
@@ -693,6 +687,17 @@ footer[role="contentinfo"] a:hover {
     position: absolute;
     top: 5px;
     right: 5px;
+    z-index: 9999;
+}
+
+.grid-view-icon .ui-button-text:before{
+    content: "\f180";
+    font: 400 15px/1 dashicons;
+}
+
+.list-view-icon .ui-button-text:before{
+    content: "\f214";
+    font: 400 15px/1 dashicons;
 }
 
 .entry-meta {
@@ -751,6 +756,8 @@ article.sticky .featured-post {
 .entry-summary,
 .mu_register {
 	line-height: 1.714285714;
+    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
 }
 .entry-content h1,
 .comment-content h1,
@@ -945,6 +952,7 @@ img.aligncenter,
 	margin-bottom: 24px;
 	margin-bottom: 1.714285714rem;
 }
+.widget-cat-area table,
 .entry-content table,
 .comment-content table {
 	border-bottom: 1px solid #ededed;
@@ -956,6 +964,7 @@ img.aligncenter,
 	margin: 0 0 1.714285714rem;
 	width: 100%;
 }
+.widget-cat-area table caption,
 .entry-content table caption,
 .comment-content table caption {
 	font-size: 16px;
@@ -963,6 +972,7 @@ img.aligncenter,
 	margin: 24px 0;
 	margin: 1.714285714rem 0;
 }
+.widget-cat-area td,
 .entry-content td,
 .comment-content td {
 	border-top: 1px solid #ededed;
@@ -972,24 +982,31 @@ img.aligncenter,
 	border-bottom: 4px double #ededed;
 	margin-bottom: 16px;
 	margin-bottom: 1.142857rem;
-	padding-bottom: 24px;
-	padding-bottom: 1.714285714rem;
+	padding-bottom: 15px;
+	padding-bottom: .9375rem;
 	word-wrap: break-word;
 	-webkit-hyphens: auto;
 	-moz-hyphens: auto;
 	hyphens: auto;
+    position: relative;
 }
+
+.site-content article:hover{
+    border-bottom: 4px double #d7d7d7;
+}
+
 .page-links {
 	clear: both;
 	line-height: 1.714285714;
 }
 footer.entry-meta {
-	margin-top: 24px;
-	margin-top: 1.714285714rem;
 	font-size: 13px;
 	font-size: 0.928571429rem;
 	line-height: 1.846153846;
 	color: #757575;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
 }
 .single-author .entry-meta .by-author {
 	display: none;
@@ -1014,7 +1031,7 @@ article .featured-img{
 .grid-view{
     float: left;
     width: 45%;
-    height: 280px;
+    height: 285px;
     margin-right: 40px;
     overflow: hidden;
 }
@@ -1321,6 +1338,9 @@ img#wpstats {
 		float: right;
 		width: 80%;
 	}
+    .author-description .author-name{
+        font-size: 25px;
+    }
 	.site {
 		margin: 0 auto;
 		overflow: hidden;
@@ -1423,6 +1443,9 @@ img#wpstats {
 		color: #636363;
 		font-weight: bold;
 	}
+    .main-navigation .menu-item-login{
+        float: right;
+    }
 	.menu-toggle {
 		display: none;
 	}

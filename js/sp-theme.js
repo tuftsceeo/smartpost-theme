@@ -21,18 +21,6 @@ var sp_theme = sp_theme || {};
                 $( 'article').removeClass( 'grid-view' );
             })
 
-            // Make the site title editable
-            $( '#site-title-editable' ).editable(
-                function(value, settings){
-                    return value;
-                },
-                {
-                    placeholder: 'Click to add a title',
-                    onblur     : 'submit',
-                    cssclass   : 'sp_compTitleEditable',
-                    maxlength  : 65
-                }
-            );
         }
     }
 
