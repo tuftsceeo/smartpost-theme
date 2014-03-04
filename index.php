@@ -13,19 +13,28 @@
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
  */
-
+global $wp_query;
 get_header(); ?>
 
 	<div id="primary" class="site-content">
 		<div id="content" role="main">
 		<?php if ( have_posts() ) : ?>
+            <div class="the-posts">
+                <?php $grid_checked = $wp_query->post_count > 1 ? 'checked="checked"' : '' ?>
+                <?php $list_checked = $wp_query->post_count > 1 ? '' : 'checked="checked"' ?>
+                <div id="post-view-format">
+                    <input type="radio" id="post-view-grid" name="post-view-radio" value="grid" <?php echo $grid_checked ?>><label for="post-view-grid" class="grid-view-icon" title="View in grid format."></label>
+                    <input type="radio" id="post-view-list" name="post-view-radio" value="list" <?php echo $list_checked ?> ><label for="post-view-list" class="list-view-icon" title="View in list format."></label>
+                    <div class="clear"></div>
+                </div>
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'content', get_post_format() ); ?>
-			<?php endwhile; ?>
+                <?php /* Start the Loop */ ?>
+                <?php while ( have_posts() ) : the_post(); ?>
+                    <?php get_template_part( 'content', get_post_format() ); ?>
+                <?php endwhile; ?>
 
-			<?php twentytwelve_content_nav( 'nav-below' ); ?>
+                <?php twentytwelve_content_nav( 'nav-below' ); ?>
+            </div><!-- end .the-psots -->
 
 		<?php else : ?>
 
@@ -35,7 +44,7 @@ get_header(); ?>
 				// Show a different message to a logged-in user who can add posts.
 			?>
 				<header class="entry-header">
-					<h1 class="entry-title"><?php _e( 'No posts to display', 'twentytwelve' ); ?></h1>
+					<h1 class="entry-title"><?php _e( 'Stay tuned!', 'twentytwelve' ); ?></h1>
 				</header>
 
 				<div class="entry-content">

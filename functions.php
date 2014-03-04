@@ -57,9 +57,8 @@ function twentytwelve_setup() {
 	// Adds RSS feed links to <head> for posts and comments.
 	add_theme_support( 'automatic-feed-links' );
 
-	// This theme uses wp_nav_menu() in two locations: for logged-in and logged-out users.
-    register_nav_menu( 'logged-in', __( 'Logged In', 'twentytwelve' ) );
-    register_nav_menu( 'logged-out', __( 'Logged Out', 'twentytwelve' ) );
+    // This theme uses wp_nav_menu() in one location.
+    register_nav_menu( 'primary', __( 'Primary Menu', 'twentytwelve' ) );
 
 	/*
 	 * This theme supports custom background color and image,
@@ -76,50 +75,89 @@ function twentytwelve_setup() {
 add_action( 'after_setup_theme', 'twentytwelve_setup' );
 
 /**
+ * Adds an option to create new menu items from the front-end of the site.
+ * @param $items
+ * @param $args
+ * @return mixed
+ */
+/*
+function add_new_menu_item( $items, $args ){
+
+    if( current_user_can( 'edit_themes' ) ){
+        $edit_menu_item_args = new stdClass();
+        $edit_menu_item_args->ID = 'edit';
+        $edit_menu_item_args->post_type = 'nav_menu_item';
+        $edit_menu_item_args->url = '#';
+        $edit_menu_item_args->post_title = 'Edit Menu';
+        $edit_menu_item_args->classes = array('menu-item', 'menu-item-type-custom', 'menu-item-object-custom', 'sp-menu-not-sortable' );
+        $edit_menu_item_args->title = '<span id="sp-edit-menu" title="Edit menu" alt="Edit menu"></span>';
+        $edit_menu_item_args->menu_order = 0; // Redefine the order
+        $edit_menu_item_args->guid = '#';
+        $edit_menu_item_args->object = 'custom';
+        $edit_menu_item_args->type = 'custom';
+        $edit_menu_item_args->type_label = 'Custom';
+
+        $edit_new_menu_item = new WP_Post( $edit_menu_item_args );
+        array_unshift( $items, $edit_new_menu_item );
+
+        if( $_GET['edit_menu'] ){
+            foreach( array_slice($items, 1) as $item ){
+                $item->title .= ' <span id="sp-edit-menu-delete" title="Delete Menu Item" alt="Delete Menu Item"></span>';
+            }
+        }
+    }
+
+    return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'add_new_menu_item', 10, 2 );
+*/
+
+/**
  * Add a menu item to the menu that displays user avatar + login/logout links. Floats menu item to the right.
  * @param $items
  * @return string
  */
-function login_menu_item($items){
+function login_menu_item( $items ){
     global $current_user;
-    if(is_user_logged_in()){
-        $login_item = '<li id="menu-item-login" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-login">';
-        $login_item .= '<a href="' . get_author_posts_url($current_user->ID) . '">';
-        $login_item .=  get_avatar($current_user->ID, 16) . ' Welcome ' . $current_user->first_name . '!';
-        $login_item .= '</a>';
-
-        $login_item .= '<ul class="sub-menu">';
-
-        $login_item .= '<li id="menu-item-logout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-logout">';
-        $login_item .= '<a href="' . get_author_posts_url($current_user->ID) . '">';
-        $login_item .= 'My Profile';
-        $login_item .= '</a>';
-        $login_item .= '</li>';
-
-        $login_item .= '<li id="menu-item-logout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-logout">';
-        $login_item .= '<a href="' . wp_logout_url() . '&redirect_to=' . home_url() .'">';
-        $login_item .= 'Logout';
-        $login_item .= '</a>';
-        $login_item .= '</li>';
-
-        if( current_user_can( 'edit_dashboard' ) ){
-            $login_item .= '<li id="menu-item-logout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-logout">';
-            $login_item .= '<a href="' . admin_url() . '" target="_new">';
-            $login_item .= 'Dashboard';
+    if( is_user_logged_in() ){
+        $login_item = '<li id="menu-item-login" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-login sp-menu-not-sortable">';
+            $login_item .= '<a href="' . get_author_posts_url($current_user->ID) . '">';
+                $login_item .=  get_avatar($current_user->ID, 16) . ' Welcome ' . $current_user->first_name . '!';
             $login_item .= '</a>';
-            $login_item .= '</li>';
-        }
 
-        $login_item .= '</ul>';
+        $login_item .= '<ul class="sub-menu sp-menu-not-sortable">';
+
+            $login_item .= '<li id="menu-item-logout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-logout sp-menu-not-sortable">';
+                $login_item .= '<a href="' . get_author_posts_url($current_user->ID) . '">';
+                    $login_item .= 'My Profile';
+                $login_item .= '</a>';
+            $login_item .= '</li>';
+
+            $login_item .= '<li id="menu-item-logout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-logout sp-menu-not-sortable">';
+                $login_item .= '<a href="' . wp_logout_url() . '&redirect_to=' . home_url() .'">';
+                    $login_item .= 'Logout';
+                $login_item .= '</a>';
+            $login_item .= '</li>';
+
+            if( current_user_can( 'edit_dashboard' ) ){
+                $login_item .= '<li id="menu-item-logout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-logout sp-menu-not-sortable">';
+                    $login_item .= '<a href="' . admin_url() . '" target="_new">';
+                        $login_item .= 'Dashboard';
+                    $login_item .= '</a>';
+                $login_item .= '</li>';
+            }
+
+            $login_item .= '</ul>';
         $login_item .= '</li>';
 
     }else{
         $login_item = '<li id="menu-item-login" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-login">';
-        $login_item .= '<a href="' . wp_login_url() . '?redirect_to=' . site_url() .'">';
-        $login_item .=  'Login';
-        $login_item .= '</a>';
+            $login_item .= '<a href="' . wp_login_url() . '?redirect_to=' . site_url() .'">';
+                $login_item .=  'Login';
+            $login_item .= '</a>';
         $login_item .= '</li>';
     }
+
     return $items . $login_item;
 }
 add_filter( 'wp_nav_menu_items', 'login_menu_item' );
@@ -207,6 +245,8 @@ function twentytwelve_scripts_styles() {
 
     // Detect whether the SP plugin has been activated - if it hasn't load extra JS
     if( !defined('SP_PLUGIN_NAME') ){
+        wp_enqueue_style( 'jquery-dynatree-css' );
+        wp_enqueue_style( 'dashicons' );
         wp_enqueue_script( 'jquery' );
         wp_enqueue_script( 'jquery-form' );
         wp_enqueue_script( 'jquery-ui-core' );
@@ -218,10 +258,15 @@ function twentytwelve_scripts_styles() {
         wp_enqueue_script( 'jquery-ui-dialog' );
         wp_enqueue_script( 'jquery-ui-tabs' );
         wp_enqueue_script( 'jquery-ui-button' );
+        wp_enqueue_script( 'jquery-ui-position' );
+        wp_enqueue_script( 'jquery-dynatree-cookie' );
+        wp_enqueue_script( 'jquery-dynatree' );
     }
 
     // Loads SP Theme Twenty Twelve related JS
-    wp_register_script( 'sp-theme-js', get_template_directory_uri() . '/js/sp-theme.js', array( 'jquery', 'jquery-ui-core' ) );
+    // wp_register_script( 'jquery-nested-sortable', get_template_directory_uri() . '/js/jquery-sortable-min.js', array( 'jquery' ) );
+    wp_register_script( 'sp-theme-js', get_template_directory_uri() . '/js/sp-theme.js', array( 'jquery' ) );
+    // wp_enqueue_script( 'jquery-nested-sortable' );
     wp_enqueue_script( 'sp-theme-js' );
 
 }
@@ -481,11 +526,11 @@ function twentytwelve_entry_meta() {
 
 	// Translators: 1 is the author's name, 2 is category, 3 is the tag, and 4 is the date.
 	if ( $tag_list ) {
-		$utility_text = __( 'Posted by <span class="by-author">%1$s</span> and tagged %2$s on %4$s.', 'twentytwelve' );
+		$utility_text = __( 'Posted by <span class="by-author">%1$s</span><span class="entry-meta-misc"> and tagged %2$s</span>on %4$s.', 'twentytwelve' );
 	} elseif ( $categories_list ) {
-		$utility_text = __( 'Posted by <span class="by-author">%1$s</span> in %2$s on %4$s.', 'twentytwelve' );
+		$utility_text = __( 'Posted by <span class="by-author">%1$s</span><span class="entry-meta-misc"> in %2$s</span> on %4$s.', 'twentytwelve' );
 	} else {
-		$utility_text = __( 'Posted by <span class="by-author">%1$s</span> on $4$s.', 'twentytwelve' );
+		$utility_text = __( 'Posted by <span class="by-author">%1$s</span>on $4$s.', 'twentytwelve' );
 	}
 
 	printf(

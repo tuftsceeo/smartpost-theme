@@ -33,29 +33,26 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
-	<header id="masthead" class="site-header" role="banner">
+    <header id="masthead" class="site-header" role="banner">
 		<hgroup>
-            <?php $sp_site_title = current_user_can( 'edit_dashboard' ) ? '<span id="site-title-editable">' . get_bloginfo( 'name' ) . '</span>' : get_bloginfo( 'name' ); ?>
-            <?php $sp_site_banner = get_option('sp_site_banner'); ?>
-			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php echo $sp_site_title; ?><span id="sp-site-banner" <?php echo current_user_can('edit_dashboard') ? 'class="upload-sp-site-banner"' : '' ?><?php echo $sp_site_banner ?></span></a></h1>
+            <?php if ( get_header_image() ) : ?>
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+                    <img src="<?php header_image(); ?>" class="header-image" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
+                </a>
+            <?php endif; ?>
+			<h1 class="site-title">
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+                    <?php bloginfo( 'name' ); ?>
+                </a>
+            </h1>
 			<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
 		</hgroup>
 
 		<nav id="site-navigation" class="main-navigation" role="navigation">
 			<h3 class="menu-toggle"><?php _e( 'Menu', 'twentytwelve' ); ?></h3>
 			<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentytwelve' ); ?>"><?php _e( 'Skip to content', 'twentytwelve' ); ?></a>
-			<?php
-            if(is_user_logged_in()){
-                wp_nav_menu( array( 'theme_location' => 'logged-in', 'menu_class' => 'nav-menu' ) );
-            }else{
-                wp_nav_menu( array( 'theme_location' => 'logged-out', 'menu_class' => 'nav-menu' ) );
-            }
-            ?>
+            <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) ); ?>
 		</nav><!-- #site-navigation -->
-
-		<?php if ( get_header_image() ) : ?>
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php header_image(); ?>" class="header-image" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" /></a>
-		<?php endif; ?>
 	</header><!-- #masthead -->
 
 	<div id="main" class="wrapper">

@@ -8,8 +8,9 @@
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
  */
+global $wp_query;
 ?>
-    <?php $grid_view = ( !is_single() && !is_front_page() ) ? 'grid-view' : ''; ?>
+    <?php $grid_view = ( !is_single() && $wp_query->post_count > 1 ) ? 'grid-view' : ''; ?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class( array( $grid_view ) ); ?>>
 		<?php if ( is_sticky() && is_home() && ! is_paged() ) : ?>
 		<div class="featured-post">
@@ -42,7 +43,31 @@
 
         <footer class="entry-meta">
             <?php twentytwelve_entry_meta(); ?>
-            <?php edit_post_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?>
+            <?php
+            if( defined('SP_PLUGIN_NAME') ){
+                $edit_mode = isset( $_GET['edit_mode'] ); // Get edit mode var
+                $owner = get_current_user_id() == get_the_author_meta('ID'); // check if the current user is the owner
+                $admin = current_user_can( 'administrator ');
+
+                $is_sp_post = false;
+                if( method_exists( 'sp_post', 'is_sp_post' ) ){
+                    $is_sp_post = sp_post::is_sp_post( get_the_ID() );
+                }
+
+                if( ($owner || $admin) && $is_sp_post ) :
+                    if( $edit_mode ) :
+                ?>
+                    <span class="view-link"><a href="<?php echo get_permalink() ?>">View</a></span>
+                <?php else: ?>
+                    <span class="edit-link"><a href="<?php echo get_permalink() ?>?edit_mode=true">Edit</a></span>
+                <?php
+                    endif;
+
+                endif;
+            }else{
+                edit_post_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' );
+            }
+            ?>
         </footer><!-- .entry-meta -->
         <div class="clear"></div>
 	</article><!-- #post -->
